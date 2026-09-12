@@ -6,8 +6,19 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        // Shitpack repo which contains our tools and dependencies
-        maven("https://jitpack.io")
+        // Shitpack repo which contains our tools and dependencies.
+        // NOTE: JitPack currently serves corrupt Gradle module metadata for
+        // recloudstream/gradle master-SNAPSHOT (maven-metadata timestamp is
+        // "aster-<sha>" instead of a real timestamp, so the .module descriptor
+        // reports version "master-aster-SNAPSHOT" and Gradle 9 fails with
+        // "inconsistent module metadata"). Resolving via POM sidesteps the
+        // broken .module file; the maven artifacts themselves are fine.
+        maven("https://jitpack.io") {
+            metadataSources {
+                mavenPom()
+                artifact()
+            }
+        }
     }
 
     dependencies {
@@ -22,7 +33,12 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven("https://jitpack.io")
+        maven("https://jitpack.io") {
+            metadataSources {
+                mavenPom()
+                artifact()
+            }
+        }
     }
 }
 
