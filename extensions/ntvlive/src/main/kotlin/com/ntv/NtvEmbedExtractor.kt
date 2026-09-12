@@ -133,7 +133,7 @@ open class NtvEmbedExtractor(context: Context) : ExtractorApi() {
                                 // Intercept .m3u8 and .mpd URLs (the stream manifest)
                                 if ((reqUrl.endsWith(".m3u8") || reqUrl.endsWith(".mpd")) && !captured.get()) {
                                     if (captured.compareAndSet(false, true)) {
-                                        cont.resume(reqUrl)
+                                        cont.resumeWith(Result.success(reqUrl))
                                         Handler(Looper.getMainLooper()).postDelayed({
                                             try { destroy() } catch (_: Exception) {}
                                         }, 500)
@@ -149,14 +149,14 @@ open class NtvEmbedExtractor(context: Context) : ExtractorApi() {
                     // Timeout after 15 seconds (matches plan spec)
                     Handler(Looper.getMainLooper()).postDelayed({
                         if (captured.compareAndSet(false, true)) {
-                            cont.resume(null)
+                            cont.resumeWith(Result.success<String?>(null))
                             try { webView.destroy() } catch (_: Exception) {}
                         }
                     }, 15000)
 
                 } catch (e: Exception) {
                     if (captured.compareAndSet(false, true)) {
-                        cont.resume(null)
+                        cont.resumeWith(Result.success<String?>(null))
                     }
                 }
 

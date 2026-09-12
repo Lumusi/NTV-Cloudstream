@@ -153,7 +153,7 @@ class NtvLive : MainAPI() {
                         this.posterUrl = mt.poster
                         this.posterHeaders = posterHeaders
                         this.plot = mt.category?.let { "Category: $it" } ?: ""
-                        this.tags = listOfNotNull(mt.source)
+                        this.tags = listOfNotNull(mt.category)
                     }
                 }
             }
