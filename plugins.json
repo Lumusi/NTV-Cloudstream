@@ -1,0 +1,22 @@
+[
+    {
+        "url": "https://raw.githubusercontent.com/Lumusi/NTV-Cloudstream/builds/ntvlive.cs3",
+        "status": 1,
+        "version": 25,
+        "name": "ntvlive",
+        "internalName": "ntvlive",
+        "authors": [
+            "JamesBonner"
+        ],
+        "description": "Watch live sports streams from ntv.st (24/7 channels + events)",
+        "fileSize": 26904,
+        "repositoryUrl": "https://github.com/Lumusi/NTV-Cloudstream",
+        "language": "en",
+        "tvTypes": [
+            "Live"
+        ],
+        "iconUrl": "https://ntv.st/favicon.ico",
+        "apiVersion": 1,
+        "fileHash": "sha256-3caa85b7b70d9130c4e2ab836927a1835b291c48328277d445bee6bf79346689"
+    }
+]
