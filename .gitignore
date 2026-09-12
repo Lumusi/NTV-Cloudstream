@@ -1,0 +1,59 @@
+# Dependencies
+.gradle/
+node_modules/
+
+# Compiled files
+*.class
+*.o
+*.obj
+*.out
+
+# Build artifacts
+build/
+dist/
+target/
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs and temp files
+*.log
+*.tmp
+
+# Python specific
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Coverage reports
+coverage/
+htmlcov/
+
+# MyPy cache
+.mypy_cache/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# NTV-specific caches
+.catalog.json
+.vod_cache.json
+.tmdb_key
+.vod_token
+.edge_cookies.json
+.epg_cache_*.xml.gz
+.goat-lock.js
+.goat-lock.wasm
+.xtream_ids.json
