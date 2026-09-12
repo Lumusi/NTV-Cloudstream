@@ -4,6 +4,6 @@
   "description": "Live sports streaming from ntv.st (24/7 channels + events)",
   "manifestVersion": 1,
   "pluginLists": [
-    "https://raw.githubusercontent.com/JamesBonner/NTV-Cloudstream/builds/plugins.json"
+    "https://raw.githubusercontent.com/Lumusi/NTV-Cloudstream/builds/plugins.json"
   ]
 }
