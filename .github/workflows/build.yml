@@ -45,6 +45,21 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
+      - name: Build cloudstream gradle plugin from source
+        run: |
+          # JitPack's artifacts for recloudstream/gradle are corrupt server-side
+          # (Sep 2026: snapshot timestamp "aster-<sha>", stub poms, 292-byte jars
+          # for every version), so build the plugin from source and publish to
+          # mavenLocal, which build.gradle.kts picks up first. Pinned to upstream
+          # master 32895aed (2026-07-02) — bump GRADLE_PLUGIN_SHA to update.
+          GRADLE_PLUGIN_SHA=32895aedb6366f5075cb99bbd2e6ce0a7cac325d
+          git clone --depth 1 https://github.com/recloudstream/gradle.git $GITHUB_WORKSPACE/upstream-gradle
+          cd $GITHUB_WORKSPACE/upstream-gradle
+          git fetch --depth 1 origin $GRADLE_PLUGIN_SHA
+          git checkout $GRADLE_PLUGIN_SHA
+          chmod +x gradlew
+          ./gradlew publishToMavenLocal
+
       - name: Build Plugins
         run: |
           cd $GITHUB_WORKSPACE/src

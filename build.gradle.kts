@@ -4,15 +4,19 @@ import org.gradle.kotlin.dsl.register
 
 buildscript {
     repositories {
+        // Locally-built cloudstream gradle plugin (see CI: built from
+        // recloudstream/gradle source via publishToMavenLocal). Must come
+        // first so it wins over remote repos.
+        mavenLocal()
         google()
         mavenCentral()
         // Shitpack repo which contains our tools and dependencies.
-        // NOTE: JitPack currently serves corrupt Gradle module metadata for
-        // recloudstream/gradle master-SNAPSHOT (maven-metadata timestamp is
-        // "aster-<sha>" instead of a real timestamp, so the .module descriptor
-        // reports version "master-aster-SNAPSHOT" and Gradle 9 fails with
-        // "inconsistent module metadata"). Resolving via POM sidesteps the
-        // broken .module file; the maven artifacts themselves are fine.
+        // NOTE (Sep 2026): JitPack's artifacts for recloudstream/gradle are
+        // corrupt server-side (snapshot timestamp "aster-<sha>", stub poms,
+        // 292-byte jars), so the plugin is built from source instead — see
+        // .github/workflows/build.yml. Other JitPack artifacts (jadb, …)
+        // are unaffected; POM-only resolution guards against the same
+        // class of broken Gradle module metadata.
         maven("https://jitpack.io") {
             metadataSources {
                 mavenPom()
@@ -23,8 +27,11 @@ buildscript {
 
     dependencies {
         classpath("com.android.tools.build:gradle:9.1.1")
-        // Cloudstream gradle plugin which makes everything work and builds plugins
-        classpath("com.github.recloudstream:gradle:master-SNAPSHOT")
+        // Cloudstream gradle plugin which makes everything work and builds plugins.
+        // Built from source in CI (recloudstream/gradle @ 32895aed) — do NOT
+        // switch back to com.github.recloudstream:gradle:master-SNAPSHOT
+        // until JitPack serves valid artifacts for it again.
+        classpath("com.lagradost.cloudstream3:gradle:local-SNAPSHOT")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.3.20")
     }
 }
